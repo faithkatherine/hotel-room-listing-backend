@@ -1,4 +1,6 @@
+from typing import Any
 from django.db import models
+from .functions.upload_location import UploadLocation
 
 # Create your models here.
 
@@ -27,9 +29,17 @@ room_availability =(
 )
 
 class Rooms(models.Model):
-    room_number     =models.CharField(max_length=50, null=False, blank=False)
+    room_number     =models.CharField(max_length=50, null=False, blank=False, unique=True)
     room_type       =models.CharField(max_length=50, choices=types, default=STANDARD, null=False, blank=False)
     availability    =models.CharField(max_length=50, choices=room_availability,default=AVAILABLE, null=False, blank=False)
-    price           =models. FloatField(null=False, blank=False)   
-    room_image      =models.FileField()       
+    price           =models.FloatField(null=False, blank=False)   
+    room_image      =models.FileField(upload_to=UploadLocation.room_location) 
+    slug            =models.SlugField(null=False, blank=True) 
+
+    class Meta:
+        verbose_name = "Room"
+    
+    def __str__(self):
+        return str(self.room_number)
+    
     

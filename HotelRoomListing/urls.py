@@ -14,8 +14,40 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.http import JsonResponse
+from django.urls import include, path
+import api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
 ]
+
+#Fallback errors
+handler400 = lambda request, exception=None: JsonResponse({
+          "status": "error",
+          "code": 400,
+          "data": None,
+          "message": "Bad request"
+        })
+
+handler403 =  lambda request, exception=None: JsonResponse({
+          "status": "error",
+          "code": 403,
+          "data": None,
+          "message": "Your are not authorized to access this resource"
+        })
+
+handler404 =  lambda request, exception=None: JsonResponse({
+          "status": "error",
+          "code": 404,
+          "data": None,
+          "message": "The resource was not found"
+        })
+
+handler500 =  lambda request, exception=None: JsonResponse({
+          "status": "error",
+          "code": 500,
+          "data": None,
+          "message": "Oops! Server experienced an error."
+        })
