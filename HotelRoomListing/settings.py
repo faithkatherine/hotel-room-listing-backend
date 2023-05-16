@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     #others
     'rest_framework',
+    'corsheaders',
 
     #My apps
     'Rooms'
@@ -59,6 +60,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
 ]
 
 ROOT_URLCONF = 'HotelRoomListing.urls'
@@ -82,7 +86,7 @@ TEMPLATES = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
-    'https://comforting-crepe-f1fe55.netlify.app/',
+    'https://comforting-crepe-f1fe55.netlify.app'
 
 ]
 CSRF_TRUSTED_ORIGINS = [
