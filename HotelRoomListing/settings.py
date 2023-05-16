@@ -79,6 +79,16 @@ TEMPLATES = [
     },
 ]
 
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:4200',
+    'https://comforting-crepe-f1fe55.netlify.app/',
+
+]
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:4200',
+    'https://comforting-crepe-f1fe55.netlify.app/',]
+
 WSGI_APPLICATION = 'HotelRoomListing.wsgi.application'
 
 
