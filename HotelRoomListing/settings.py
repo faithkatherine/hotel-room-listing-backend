@@ -13,6 +13,8 @@ import json
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from google.oauth2 import service_account
+from google.cloud import storage
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -147,15 +149,24 @@ USE_I18N = True
 
 USE_TZ = True
 
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
 GOOGLE_APPLICATION_CREDENTIALS = os.path.join(
     BASE_DIR, os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
+
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
+)
+GS_BUCKET_NAME = '5stargetaway'
+
+
+PROJECT_ID = os.getenv('PROJECT_ID')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL  = '/static/'
-MEDIA_URL   = '/media/'
+MEDIA_URL   = 'https://storage.googleapis.com/5stargetaway/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
