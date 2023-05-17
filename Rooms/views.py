@@ -28,8 +28,7 @@ class RoomObjectView(APIView):
     
     def put(self, request, slug, format=None):
         room = self.get_room(slug)
-        serializer = RoomSerializer(room, data=request.data)
-        serializer.fields.pop('room_image')
+        serializer = UpdateRoomSerializer(room, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

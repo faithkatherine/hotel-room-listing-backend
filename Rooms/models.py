@@ -20,18 +20,11 @@ types=(
     (VILLA, "VILLA")
 )
 
-BOOKED      = "Booked"
-AVAILABLE   = "Available"
-
-room_availability =(
-    (BOOKED, "BOOKED"),
-    (AVAILABLE, "AVAILABLE")
-)
 
 class Rooms(models.Model):
     room_number     =models.CharField(max_length=50, null=False, blank=False, unique=True)
     room_type       =models.CharField(max_length=50, choices=types, default=STANDARD, null=False, blank=False)
-    availability    =models.CharField(max_length=50, choices=room_availability,default=AVAILABLE, null=False, blank=False)
+    availability    =models.BooleanField(default=True)
     price           =models.FloatField(null=False, blank=False)   
     room_image      =models.FileField(upload_to=UploadLocation.room_location) 
     slug            =models.SlugField(null=False, blank=True) 
